@@ -1,0 +1,210 @@
+.signup-page {
+  min-height: calc(100vh - 60px);
+  padding: 1.5rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #18191a;
+}
+
+.signup-page__title {
+  margin: 0 0 2.25rem;
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.signup-form {
+  width: 100%;
+  max-width: 560px;
+  padding: 2rem 2.25rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: #222426;
+  border-radius: 18px;
+}
+
+.signup-form__account-type {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.signup-form__account-type legend {
+  width: 100%;
+  margin-bottom: 0.875rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.signup-form__account-options {
+  padding: 3px;
+  display: flex;
+  gap: 3px;
+  background: #1a1e1a;
+  border: 1px solid #2d2f33;
+  border-radius: 10px;
+}
+
+.signup-form button.signup-form__account-button {
+  padding: 0.5rem 1.75rem;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  color: #9fa0a1;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.signup-form button.signup-form__account-button.is-selected {
+  background: #78dc50;
+  color: #111111;
+}
+
+.signup-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4375rem;
+}
+
+.signup-form__field label {
+  color: #9a9ea4;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.signup-form__field label span {
+  color: #e53935;
+}
+
+.signup-form__field input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  background: #1e2022;
+  border: 1.5px solid #33363a;
+  border-radius: 9px;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.signup-form__field input:focus {
+  border-color: #78dc50;
+  box-shadow: 0 0 0 3px rgb(120 220 80 / 12%);
+}
+
+.signup-form__field input.is-invalid {
+  border-color: #e53935;
+}
+
+.signup-form__field input::placeholder {
+  color: #60646c;
+}
+
+.signup-form__helper {
+  color: #9fa0a1;
+  font-size: 0.78rem;
+}
+
+.signup-form__error {
+  color: #ff6b6b;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.signup-form__success {
+  margin: 0;
+  padding: 0.75rem;
+  background: rgb(120 220 80 / 10%);
+  border: 1px solid #78dc50;
+  border-radius: 8px;
+  color: #9bea7b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.signup-form__actions {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.signup-form button.signup-form__submit {
+  width: 170px;
+  padding: 0.8125rem;
+  background: #78dc50;
+  border: 0;
+  border-radius: 10px;
+  color: #111111;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.signup-form button.signup-form__submit:hover {
+  background: #6fd047;
+}
+
+.signup-form__login {
+  margin: 0;
+  color: #9fa0a1;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.signup-form__login button {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #ffffff;
+  font-size: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.signup-form__login button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .signup-page {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .signup-page__title {
+    margin-bottom: 1.5rem;
+  }
+
+  .signup-form {
+    padding: 1.5rem;
+  }
+
+  .signup-form__account-options {
+    width: 100%;
+  }
+
+  .signup-form button.signup-form__account-button {
+    flex: 1;
+    padding-inline: 0.75rem;
+  }
+
+  .signup-form button.signup-form__submit {
+    width: 100%;
+  }
+}
