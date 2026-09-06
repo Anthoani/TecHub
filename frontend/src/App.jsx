@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
+import SignUpPage from './pages/SignUpPage';
+
 import PrivateRoute from './components/PrivateRoute';
 import EmptyState from './components/EmptyState';
 import Catalog from './pages/Catalog';
@@ -25,7 +27,7 @@ export default function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/cadastro" element={<Register />} />
+          <Route path="/cadastro" element={<SignUpPage />} />
 
           <Route element={<PrivateRoute />}>
             <Route path="/cart" element={<Cart />} />
