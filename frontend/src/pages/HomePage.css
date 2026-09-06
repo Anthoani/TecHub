@@ -1,0 +1,132 @@
+.home-page {
+  min-height: calc(100vh - 60px);
+  background: #1b1c1e;
+  color: #ffffff;
+}
+
+.home-hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-hero__logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 2.25rem;
+}
+
+.home-hero__title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.home-hero__description {
+  margin: 0.875rem 0 1.75rem;
+  color: #8a8f98;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.home-hero__primary-button,
+.home-hero__secondary-button {
+  min-width: 170px;
+  padding: 0.625rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.home-hero__primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #7ee753;
+  color: #111213;
+  transition: background 160ms ease;
+}
+
+.home-hero__primary-button:hover {
+  background: #6fd047;
+  color: #111213;
+}
+
+.home-hero__secondary-button {
+  background: #ffffff;
+  color: #111213;
+}
+
+.home-hero__secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.home-features {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 4.375rem;
+}
+
+.home-features__title {
+  margin: 0 0 1.25rem;
+  color: #ffffff;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.home-features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 800px) {
+  .home-features__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .home-hero {
+    padding-top: 2.25rem;
+  }
+
+  .home-hero__logo {
+    width: 160px;
+    margin-bottom: 1.75rem;
+  }
+
+  .home-hero__description br {
+    display: none;
+  }
+
+  .home-hero__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .home-hero__primary-button,
+  .home-hero__secondary-button {
+    width: 100%;
+  }
+}

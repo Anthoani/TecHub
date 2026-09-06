@@ -1641,3 +1641,9 @@ body {
 .order-card:hover {
   border-color: var(--color-ink-300);
 }
+
+/*Alterações TecHub ======================================================*/
+.app-content {
+  width: 100%;
+  flex: 1;
+}

@@ -1,0 +1,41 @@
+.feature-card {
+  min-height: 250px;
+  padding: 2.25rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #242528;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.feature-card__icon {
+  width: 78px;
+  height: 78px;
+  margin-bottom: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-card__icon svg,
+.feature-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.feature-card__title {
+  margin: 0 0 0.625rem;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.feature-card__description {
+  max-width: 240px;
+  margin: 0;
+  color: #8a8f98;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

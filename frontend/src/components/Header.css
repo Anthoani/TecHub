@@ -1,0 +1,150 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: #17181a;
+  border-bottom: 1px solid #282a2d;
+}
+
+.site-header__content {
+  min-height: 60px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.875rem;
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.site-header__brand:hover {
+  color: #fff;
+}
+
+.site-header__symbol {
+  color: #7ee753;
+  font-family: monospace;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.site-header__menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header__navigation,
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-header button.site-header__nav-item,
+.site-header button.site-header__login,
+.site-header button.site-header__menu-button {
+  background: transparent;
+  box-shadow: none;
+}
+
+.site-header button.site-header__nav-item {
+  padding: 0.5rem;
+  color: #a0a4ab;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.site-header__nav-item:disabled,
+.site-header__login:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.site-header button.site-header__login,
+.site-header__signup {
+  min-width: 96px;
+  min-height: 36px;
+  padding: 0.45rem 1.125rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.site-header button.site-header__login {
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.site-header__signup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #7ee753;
+  color: #111213;
+}
+
+.site-header__signup:hover {
+  background: #6fd047;
+  color: #111213;
+}
+
+.site-header button.site-header__menu-button {
+  display: none;
+  margin-left: auto;
+  padding: 0.5rem;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .site-header__content {
+    min-height: 60px;
+    padding: 0 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .site-header button.site-header__menu-button {
+    display: inline-flex;
+  }
+
+  .site-header__menu {
+    width: calc(100% + 3rem);
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    display: none;
+    flex-basis: calc(100% + 3rem);
+    flex-direction: column;
+    align-items: stretch;
+    border-top: 1px solid #282a2d;
+  }
+
+  .site-header__menu.is-open {
+    display: flex;
+  }
+
+  .site-header__navigation,
+  .site-header__actions {
+    padding: 1rem 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-header__actions {
+    padding-top: 0;
+  }
+
+  .site-header__nav-item,
+  .site-header__login,
+  .site-header__signup {
+    width: 100%;
+  }
+}

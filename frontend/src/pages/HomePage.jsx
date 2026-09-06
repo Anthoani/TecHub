@@ -1,0 +1,70 @@
+import { Link } from 'react-router-dom';
+import FeatureCard from '../components/FeatureCard';
+import logoTecHub from '../assets/LogoTecHubPNG.png';
+import './HomePage.css';
+
+export default function HomePage() {
+  return (
+    <div className="home-page">
+      <section className="home-hero">
+        <img
+          src={logoTecHub}
+          alt="Logo do TecHub"
+          className="home-hero__logo"
+        />
+
+        <h1 className="home-hero__title">
+          Mostre o que você sabe
+          <br />
+          construir, o mercado quer ver.
+        </h1>
+
+        <p className="home-hero__description">
+          Conecte seus projetos a recrutadores
+          <br />
+          através de um portfólio visual.
+        </p>
+
+        <div className="home-hero__actions">
+          <Link to="/projeto/novo" className="home-hero__primary-button">
+            Publique seu projeto
+          </Link>
+
+          <button
+            type="button"
+            className="home-hero__secondary-button"
+            disabled
+          >
+            Explore projetos
+          </button>
+        </div>
+      </section>
+
+      <section className="home-features" aria-labelledby="features-title">
+        <h2 id="features-title" className="home-features__title">
+          Como funciona
+        </h2>
+
+        <div className="home-features__grid">
+          <FeatureCard
+            icon={<i className="fa-solid fa-graduation-cap" />}
+            title="Crie seu Portfólio"
+            description="Cadastre seu perfil institucional e transforme seus aprendizados em portfólio real."
+          />
+
+          <FeatureCard
+            icon={<i className="fa-solid fa-shield-halved" />}
+            title="Projetos Checados"
+            description="Os envios passam por uma moderação básica antes de ficarem visíveis na plataforma."
+          />
+
+          <FeatureCard
+            icon={<i className="fa-solid fa-network-wired" />}
+            title="Conexão e Vitrine"
+            description="Publique, entre no radar e fique disponível para o contato de recrutadores da região."
+          />
+        </div>
+      </section>
+    </div>
+  );
+}

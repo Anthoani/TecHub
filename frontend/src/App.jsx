@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Header from './components/Header';
+import HomePage from './pages/HomePage';
 import PrivateRoute from './components/PrivateRoute';
 import EmptyState from './components/EmptyState';
 import Catalog from './pages/Catalog';
@@ -18,13 +18,14 @@ import Favorites from './pages/Favorites';
 export default function App() {
   return (
     <div className="app-shell">
-      <Navbar />
-      <main className="container">
+      <Header />
+      <main className="app-content">
         <Routes>
-          <Route path="/" element={<Catalog />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/cadastro" element={<Register />} />
 
           <Route element={<PrivateRoute />}>
             <Route path="/cart" element={<Cart />} />
@@ -41,7 +42,6 @@ export default function App() {
           />
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 }
