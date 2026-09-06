@@ -1,0 +1,430 @@
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
+import "./NewProjectPage.css";
+
+import frameEtiqueta from "@/imports/Etiqueta.png";
+import lupaImg from "@/imports/lupa.png";
+import botaoX from "@/imports/botaoX.png";
+import maisImg from "@/imports/mais.png";
+import boldImg from "@/imports/negrito.png";
+import italicImg from "@/imports/italico.png";
+import listaImg from "@/imports/lista.png";
+import linkImg from "@/imports/link.png";
+
+const MOCK_COLLABORATORS = [
+{ id: 1, name: "Antoni Ferraz", color: "#3a5a8a" },
+{ id: 2, name: "Gabriela Rodrigues", color: "#8a3a5a" },
+{ id: 3, name: "Marcio Zunique", color: "#555" },
+{ id: 4, name: "Lucas Mendes", color: "#4a7a5a" },
+];
+
+const STATUS_OPTIONS = [
+"Em design",
+"Em desenvolvimento",
+"Concluído",
+"Pausado",
+];
+
+const RULES = [
+"O rascunho salvo fica visível para você e os colaboradores.",
+"Os colaboradores também podem editar o projeto.",
+"Só o dono pode excluir o projeto.",
+];
+
+export default function NewProjectPage() {
+const navigate = useNavigate();
+
+const [title, setTitle] = useState("");
+const [description, setDescription] = useState("");
+
+const [tagInput, setTagInput] = useState("");
+const [tags, setTags] = useState(["Web", "Front-end"]);
+
+const [collaboratorInput, setCollaboratorInput] = useState("");
+const [collaborators] = useState(MOCK_COLLABORATORS);
+
+const [github, setGithub] = useState("");
+const [liveUrl, setLiveUrl] = useState("");
+
+const [status, setStatus] = useState("Em design");
+const [dragOver, setDragOver] = useState(false);
+
+function handleTagKeyDown(e) {
+if (e.key === "Enter") {
+e.preventDefault();
+
+  const newTag = tagInput.trim();
+
+  if (newTag && !tags.includes(newTag)) {
+    setTags([...tags, newTag]);
+    setTagInput("");
+  }
+}
+
+}
+
+function removeTag(tagToRemove) {
+setTags(tags.filter((tag) => tag !== tagToRemove));
+}
+
+function handleDragOver(e) {
+e.preventDefault();
+setDragOver(true);
+}
+
+function handleDragLeave() {
+setDragOver(false);
+}
+
+function handleDrop(e) {
+e.preventDefault();
+setDragOver(false);
+}
+
+return (
+<main className="new-project-page">
+<h1 className="new-project-title">
+Novo projeto
+</h1>
+
+  <form className="new-project-card">
+    {/* Título */}
+    <div className="form-field">
+      <label className="form-label">
+        Título <span className="required">*</span>
+      </label>
+
+      <input
+        type="text"
+        maxLength={100}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="project-input"
+        placeholder="Digite o título do projeto"
+      />
+
+      <span className="input-counter">
+        {title.length}/100
+      </span>
+    </div>
+
+    {/* Descrição */}
+    <div className="form-field">
+      <label className="form-label">
+        Descrição do projeto
+      </label>
+
+      <div className="description-container">
+        <div className="toolbar">
+          <button
+            type="button"
+            title="Negrito"
+            className="toolbar-button"
+          >
+            <img
+              src={boldImg}
+              alt="Negrito"
+              className="toolbar-icon"
+            />
+          </button>
+
+          <button
+            type="button"
+            title="Itálico"
+            className="toolbar-button"
+          >
+            <img
+              src={italicImg}
+              alt="Itálico"
+              className="toolbar-icon"
+            />
+          </button>
+
+          <button
+            type="button"
+            title="Lista"
+            className="toolbar-button"
+          >
+            <img
+              src={listaImg}
+              alt="Lista"
+              className="toolbar-icon"
+            />
+          </button>
+
+          <button
+            type="button"
+            title="Link"
+            className="toolbar-button"
+          >
+            <img
+              src={linkImg}
+              alt="Link"
+              className="toolbar-icon"
+            />
+          </button>
+        </div>
+
+        <textarea
+          maxLength={3000}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows={6}
+          className="description-textarea"
+          placeholder="Descreva seu projeto..."
+        />
+      </div>
+
+      <span className="description-counter">
+        {description.length}/3000
+      </span>
+    </div>
+
+    {/* Tags */}
+    <div className="form-field">
+      <label className="form-label">
+        Tags
+      </label>
+
+      <div className="tags-container">
+        <div className="tags-search">
+          <img
+            src={frameEtiqueta}
+            alt="Tags"
+            className="toolbar-icon"
+          />
+
+          <input
+            type="text"
+            placeholder="Digite para buscar tags"
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            onKeyDown={handleTagKeyDown}
+            className="tags-input"
+          />
+        </div>
+
+        {tags.length > 0 && (
+          <div className="selected-tags">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="tag"
+              >
+                {tag}
+
+                <button
+                  type="button"
+                  onClick={() => removeTag(tag)}
+                  className="tag-remove-button"
+                  title={`Remover ${tag}`}
+                >
+                  <img
+                    src={botaoX}
+                    alt="Remover"
+                    className="tag-remove-icon"
+                  />
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* Colaboradores */}
+    <div className="form-field">
+      <label className="form-label">
+        Colaboradores
+      </label>
+
+      <div className="tags-container">
+        <div className="tags-search">
+          <img
+            src={lupaImg}
+            alt="Buscar"
+            className="toolbar-icon"
+          />
+
+          <input
+            type="text"
+            placeholder="Pesquisar colaborador"
+            value={collaboratorInput}
+            onChange={(e) => setCollaboratorInput(e.target.value)}
+            className="tags-input"
+          />
+        </div>
+
+        {collaborators.length > 0 && (
+          <div className="collaborators-grid">
+            {collaborators.map((collaborator) => (
+              <div
+                key={collaborator.id}
+                className="collaborator-card"
+              >
+                <button
+                  type="button"
+                  title="Remover"
+                  className="collaborator-remove-button"
+                >
+                  <img
+                    src={botaoX}
+                    alt="Remover"
+                    className="collaborator-remove-icon"
+                  />
+                </button>
+
+                <div
+                  className="collaborator-avatar"
+                  style={{
+                    backgroundColor: collaborator.color,
+                  }}
+                >
+                  {collaborator.name.charAt(0)}
+                </div>
+
+                <span className="collaborator-name">
+                  {collaborator.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <ul className="collaborator-rules">
+        {RULES.map((rule) => (
+          <li key={rule}>
+            {rule}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Links externos */}
+    <div className="external-links">
+      <div className="external-link-field">
+        <GithubIcon />
+
+        <input
+          type="url"
+          placeholder="https://github.com/usuario/repositorio"
+          value={github}
+          onChange={(e) => setGithub(e.target.value)}
+          className="project-input"
+        />
+      </div>
+
+      <div className="external-link-field">
+        <ExternalLinkIcon />
+
+        <input
+          type="url"
+          placeholder="Link para demonstração"
+          value={liveUrl}
+          onChange={(e) => setLiveUrl(e.target.value)}
+          className="project-input"
+        />
+      </div>
+    </div>
+
+    {/* Upload */}
+    <div
+      className={`upload-area ${dragOver ? "drag-over" : ""}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
+      <img
+        src={maisImg}
+        alt="Adicionar"
+        className="upload-icon"
+      />
+
+      <div className="upload-text">
+        <p className="upload-title">
+          Adicionar fotos / vídeos
+        </p>
+
+        <p className="upload-helper">
+          Ou arraste e solte arquivos aqui
+        </p>
+      </div>
+    </div>
+
+    {/* Status */}
+    <div className="status-section">
+      <label className="form-label">
+        Status
+      </label>
+
+      <div className="status-options">
+        {STATUS_OPTIONS.map((option) => {
+          const active = status === option;
+
+          return (
+            <button
+              type="button"
+              key={option}
+              onClick={() => setStatus(option)}
+              className={`status-button ${
+                active ? "active" : ""
+              }`}
+            >
+              <span className="status-radio">
+                {active && (
+                  <span className="status-radio-inner" />
+                )}
+              </span>
+
+              {option}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+
+    {/* Ações */}
+    <div className="actions">
+      <button
+        type="button"
+        onClick={() => navigate("/")}
+        className="action-button save-draft"
+      >
+        Salvar rascunho
+      </button>
+
+      <button
+        type="button"
+        className="action-button submit-review"
+      >
+        Enviar para revisão
+      </button>
+    </div>
+  </form>
+</main>
+
+);
+}
+
+function GithubIcon() {
+return (
+<svg className="external-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" >
+<path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+</svg>
+);
+}
+
+function ExternalLinkIcon() {
+return (
+<svg className="external-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" >
+<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+
+  <path
+    d="M15 3h6v6M10 14L21 3"
+  />
+</svg>
+
+);
+}
