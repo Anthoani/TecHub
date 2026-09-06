@@ -1,16 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import "./NewProjectPage.css";
 
-import frameEtiqueta from "@/imports/Etiqueta.png";
-import lupaImg from "@/imports/lupa.png";
-import botaoX from "@/imports/botaoX.png";
-import maisImg from "@/imports/mais.png";
-import boldImg from "@/imports/negrito.png";
-import italicImg from "@/imports/italico.png";
-import listaImg from "@/imports/lista.png";
-import linkImg from "@/imports/link.png";
 
 const MOCK_COLLABORATORS = [
 { id: 1, name: "Antoni Ferraz", color: "#3a5a8a" },
@@ -122,11 +114,7 @@ Novo projeto
             title="Negrito"
             className="toolbar-button"
           >
-            <img
-              src={boldImg}
-              alt="Negrito"
-              className="toolbar-icon"
-            />
+            <i className="fa-solid fa-bold toolbar-icon" title="Negrito" aria-hidden="true" />
           </button>
 
           <button
@@ -134,11 +122,7 @@ Novo projeto
             title="Itálico"
             className="toolbar-button"
           >
-            <img
-              src={italicImg}
-              alt="Itálico"
-              className="toolbar-icon"
-            />
+            <i className="fa-solid fa-italic toolbar-icon" title="Itálico" aria-hidden="true" />
           </button>
 
           <button
@@ -146,11 +130,7 @@ Novo projeto
             title="Lista"
             className="toolbar-button"
           >
-            <img
-              src={listaImg}
-              alt="Lista"
-              className="toolbar-icon"
-            />
+            <i className="fa-solid fa-list-ul toolbar-icon" title="Lista" aria-hidden="true" />
           </button>
 
           <button
@@ -158,11 +138,7 @@ Novo projeto
             title="Link"
             className="toolbar-button"
           >
-            <img
-              src={linkImg}
-              alt="Link"
-              className="toolbar-icon"
-            />
+            <i className="fa-solid fa-link toolbar-icon" title="Link" aria-hidden="true" />
           </button>
         </div>
 
@@ -189,11 +165,7 @@ Novo projeto
 
       <div className="tags-container">
         <div className="tags-search">
-          <img
-            src={frameEtiqueta}
-            alt="Tags"
-            className="toolbar-icon"
-          />
+          <i className="fa-solid fa-tag toolbar-icon" title="Tags" aria-hidden="true" />
 
           <input
             type="text"
@@ -220,11 +192,7 @@ Novo projeto
                   className="tag-remove-button"
                   title={`Remover ${tag}`}
                 >
-                  <img
-                    src={botaoX}
-                    alt="Remover"
-                    className="tag-remove-icon"
-                  />
+                  <i className="fa-solid fa-xmark tag-remove-icon" title="Remover" aria-hidden="true" />
                 </button>
               </span>
             ))}
@@ -241,11 +209,7 @@ Novo projeto
 
       <div className="tags-container">
         <div className="tags-search">
-          <img
-            src={lupaImg}
-            alt="Buscar"
-            className="toolbar-icon"
-          />
+          <i className="fa-solid fa-magnifying-glass toolbar-icon" title="Buscar" aria-hidden="true" />
 
           <input
             type="text"
@@ -268,11 +232,7 @@ Novo projeto
                   title="Remover"
                   className="collaborator-remove-button"
                 >
-                  <img
-                    src={botaoX}
-                    alt="Remover"
-                    className="collaborator-remove-icon"
-                  />
+                  <i className="fa-solid fa-xmark collaborator-remove-icon" title="Remover" aria-hidden="true" />
                 </button>
 
                 <div
@@ -336,11 +296,7 @@ Novo projeto
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <img
-        src={maisImg}
-        alt="Adicionar"
-        className="upload-icon"
-      />
+      <i className="fa-solid fa-plus upload-icon" title="Adicionar" aria-hidden="true" />
 
       <div className="upload-text">
         <p className="upload-title">
