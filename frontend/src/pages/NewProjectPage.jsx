@@ -24,6 +24,43 @@ const RULES = [
 "Só o dono pode excluir o projeto.",
 ];
 
+function isValidUrl(value) {
+try {
+const { protocol } = new URL(value);
+return protocol === "http:" || protocol === "https:";
+} catch {
+return false;
+}
+}
+
+function validateForm(form) {
+const errors = {};
+
+if (!form.title.trim()) {
+errors.title = "O título é obrigatório.";
+} else if (form.title.trim().length < 3) {
+errors.title = "Informe pelo menos 3 caracteres.";
+}
+
+if (!form.description.trim()) {
+errors.description = "Descreva o projeto antes de enviar.";
+}
+
+if (form.tags.length === 0) {
+errors.tags = "Adicione pelo menos uma tag.";
+}
+
+if (form.github && !isValidUrl(form.github)) {
+errors.github = "Informe uma URL válida, começando com https://.";
+}
+
+if (form.liveUrl && !isValidUrl(form.liveUrl)) {
+errors.liveUrl = "Informe uma URL válida, começando com https://.";
+}
+
+return errors;
+}
+
 export default function NewProjectPage() {
 const navigate = useNavigate();
 
@@ -34,13 +71,28 @@ const [tagInput, setTagInput] = useState("");
 const [tags, setTags] = useState(["Web", "Front-end"]);
 
 const [collaboratorInput, setCollaboratorInput] = useState("");
-const [collaborators] = useState(MOCK_COLLABORATORS);
+const [collaborators, setCollaborators] = useState([MOCK_COLLABORATORS[0]]);
 
 const [github, setGithub] = useState("");
 const [liveUrl, setLiveUrl] = useState("");
 
 const [status, setStatus] = useState("Em design");
+
+const [files, setFiles] = useState([]);
 const [dragOver, setDragOver] = useState(false);
+
+const [errors, setErrors] = useState({});
+const [successMessage, setSuccessMessage] = useState("");
+
+// Colaboradores que ainda não foram adicionados, filtrados pela busca.
+const search = collaboratorInput.trim().toLowerCase();
+const suggestions = search
+? MOCK_COLLABORATORS.filter(
+    (person) =>
+      person.name.toLowerCase().includes(search) &&
+      !collaborators.some((added) => added.id === person.id)
+  )
+: [];
 
 function handleTagKeyDown(e) {
 if (e.key === "Enter") {
@@ -60,6 +112,27 @@ function removeTag(tagToRemove) {
 setTags(tags.filter((tag) => tag !== tagToRemove));
 }
 
+function addCollaborator(person) {
+setCollaborators([...collaborators, person]);
+setCollaboratorInput("");
+}
+
+function removeCollaborator(id) {
+setCollaborators(collaborators.filter((person) => person.id !== id));
+}
+
+function addFiles(fileList) {
+const incoming = Array.from(fileList);
+
+if (incoming.length > 0) {
+  setFiles([...files, ...incoming]);
+}
+}
+
+function removeFile(position) {
+setFiles(files.filter((file, index) => index !== position));
+}
+
 function handleDragOver(e) {
 e.preventDefault();
 setDragOver(true);
@@ -72,6 +145,23 @@ setDragOver(false);
 function handleDrop(e) {
 e.preventDefault();
 setDragOver(false);
+addFiles(e.dataTransfer.files);
+}
+
+function handleSubmit(e) {
+e.preventDefault();
+
+const validationErrors = validateForm({ title, description, tags, github, liveUrl });
+setErrors(validationErrors);
+
+if (Object.keys(validationErrors).length > 0) {
+  setSuccessMessage("");
+  return;
+}
+
+setSuccessMessage(
+  "Projeto validado com sucesso! O envio para revisão será integrado em uma próxima Sprint."
+);
 }
 
 return (
@@ -80,7 +170,7 @@ return (
 Novo projeto
 </h1>
 
-  <form className="new-project-card">
+  <form className="new-project-card" onSubmit={handleSubmit} noValidate>
     {/* Título */}
     <div className="form-field">
       <label className="form-label">
@@ -99,6 +189,10 @@ Novo projeto
       <span className="input-counter">
         {title.length}/100
       </span>
+
+      {errors.title && (
+        <span className="field-error">{errors.title}</span>
+      )}
     </div>
 
     {/* Descrição */}
@@ -155,6 +249,10 @@ Novo projeto
       <span className="description-counter">
         {description.length}/3000
       </span>
+
+      {errors.description && (
+        <span className="field-error">{errors.description}</span>
+      )}
     </div>
 
     {/* Tags */}
@@ -199,6 +297,10 @@ Novo projeto
           </div>
         )}
       </div>
+
+      {errors.tags && (
+        <span className="field-error">{errors.tags}</span>
+      )}
     </div>
 
     {/* Colaboradores */}
@@ -227,6 +329,32 @@ Novo projeto
           />
         </div>
 
+        {search && (
+          <ul className="collaborator-suggestions">
+            {suggestions.length > 0 ? (
+              suggestions.map((person) => (
+                <li key={person.id}>
+                  <button
+                    type="button"
+                    className="collaborator-suggestion"
+                    onClick={() => addCollaborator(person)}
+                  >
+                    <span
+                      className="collaborator-suggestion-avatar"
+                      style={{ backgroundColor: person.color }}
+                    >
+                      {person.name.charAt(0)}
+                    </span>
+                    {person.name}
+                  </button>
+                </li>
+              ))
+            ) : (
+              <li className="collaborator-empty">Nenhum colaborador encontrado.</li>
+            )}
+          </ul>
+        )}
+
         {collaborators.length > 0 && (
           <div className="collaborators-grid">
             {collaborators.map((collaborator) => (
@@ -236,7 +364,8 @@ Novo projeto
               >
                 <button
                   type="button"
-                  title="Remover"
+                  title={`Remover ${collaborator.name}`}
+                  onClick={() => removeCollaborator(collaborator.id)}
                   className="collaborator-remove-button"
                 >
                   <i className="fa-solid fa-xmark collaborator-remove-icon" title="Remover" aria-hidden="true" />
@@ -283,6 +412,10 @@ Novo projeto
         />
       </div>
 
+      {errors.github && (
+        <span className="field-error">{errors.github}</span>
+      )}
+
       <div className="external-link-field">
         <ExternalLinkIcon />
 
@@ -294,15 +427,30 @@ Novo projeto
           className="project-input"
         />
       </div>
+
+      {errors.liveUrl && (
+        <span className="field-error">{errors.liveUrl}</span>
+      )}
     </div>
 
     {/* Upload */}
-    <div
+    <label
       className={`upload-area ${dragOver ? "drag-over" : ""}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
+      <input
+        type="file"
+        multiple
+        accept="image/*,video/*"
+        className="upload-input"
+        onChange={(e) => {
+          addFiles(e.target.files);
+          e.target.value = "";
+        }}
+      />
+
       <i className="fa-solid fa-plus upload-icon" title="Adicionar" aria-hidden="true" />
 
       <div className="upload-text">
@@ -314,7 +462,26 @@ Novo projeto
           Ou arraste e solte arquivos aqui
         </p>
       </div>
-    </div>
+    </label>
+
+    {files.length > 0 && (
+      <ul className="upload-file-list">
+        {files.map((file, index) => (
+          <li key={`${file.name}-${index}`} className="upload-file">
+            <i className="fa-solid fa-paperclip" aria-hidden="true" />
+            <span className="upload-file-name">{file.name}</span>
+            <button
+              type="button"
+              className="upload-file-remove"
+              onClick={() => removeFile(index)}
+              title={`Remover ${file.name}`}
+            >
+              <i className="fa-solid fa-xmark" aria-hidden="true" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    )}
 
     {/* Status */}
     <div className="status-section">
@@ -347,6 +514,11 @@ Novo projeto
         })}
       </div>
     </div>
+    {successMessage && (
+      <p className="form-success" role="status">
+        {successMessage}
+      </p>
+    )}
 
     {/* Ações */}
     <div className="actions">
@@ -359,7 +531,7 @@ Novo projeto
       </button>
 
       <button
-        type="button"
+        type="submit"
         className="action-button submit-review"
       >
         Enviar para revisão
