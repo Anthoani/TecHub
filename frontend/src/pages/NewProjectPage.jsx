@@ -84,7 +84,7 @@ Novo projeto
     {/* Título */}
     <div className="form-field">
       <label className="form-label">
-        Título <span className="required">*</span>
+        <div> Título<span className="required">*</span> </div>
       </label>
 
       <input
@@ -108,37 +108,37 @@ Novo projeto
       </label>
 
       <div className="description-container">
-        <div className="toolbar">
+        <div className="project-toolbar">
           <button
             type="button"
             title="Negrito"
-            className="toolbar-button"
+            className="project-toolbar-button"
           >
-            <i className="fa-solid fa-bold toolbar-icon" title="Negrito" aria-hidden="true" />
+            <i className="fa-solid fa-bold project-toolbar-icon" title="Negrito" aria-hidden="true" />
           </button>
 
           <button
             type="button"
             title="Itálico"
-            className="toolbar-button"
+            className="project-toolbar-button"
           >
-            <i className="fa-solid fa-italic toolbar-icon" title="Itálico" aria-hidden="true" />
+            <i className="fa-solid fa-italic project-toolbar-icon" title="Itálico" aria-hidden="true" />
           </button>
 
           <button
             type="button"
             title="Lista"
-            className="toolbar-button"
+            className="project-toolbar-button"
           >
-            <i className="fa-solid fa-list-ul toolbar-icon" title="Lista" aria-hidden="true" />
+            <i className="fa-solid fa-list project-toolbar-icon" title="Lista" aria-hidden="true" />
           </button>
 
           <button
             type="button"
             title="Link"
-            className="toolbar-button"
+            className="project-toolbar-button"
           >
-            <i className="fa-solid fa-link toolbar-icon" title="Link" aria-hidden="true" />
+            <i className="fa-solid fa-link project-toolbar-icon" title="Link" aria-hidden="true" />
           </button>
         </div>
 
@@ -209,7 +209,14 @@ Novo projeto
 
       <div className="tags-container">
         <div className="tags-search">
-          <i className="fa-solid fa-magnifying-glass toolbar-icon" title="Buscar" aria-hidden="true" />
+          <svg
+            className="tag-outline-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+        <path d="M4 4h7.5L20 12.5 12.5 20 4 11.5V4Z" />
+        <circle cx="8" cy="8" r="1.2" />
+        </svg>
 
           <input
             type="text"
