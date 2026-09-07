@@ -591,3 +591,137 @@
   background: #78dc50 !important;
   color: #101010 !important;
 }
+/* ===== Validacao, sugestoes de colaborador e lista de upload ===== */
+
+.field-error {
+  color: #ff6b6b;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.form-success {
+  margin: 0;
+  padding: 12px;
+  background: rgba(120, 220, 80, 0.1);
+  border: 1px solid var(--green);
+  border-radius: 8px;
+  color: #9bea7b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.collaborator-suggestions {
+  margin: 0;
+  padding: 6px;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.new-project-card .collaborator-suggestion {
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent !important;
+  border: 0;
+  border-radius: 7px !important;
+  box-shadow: none !important;
+  color: var(--text) !important;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.new-project-card .collaborator-suggestion:hover {
+  background: #2a2b2e !important;
+}
+
+.collaborator-suggestion-avatar {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.collaborator-empty {
+  padding: 10px 8px;
+  color: var(--placeholder);
+  font-size: 0.82rem;
+}
+
+.upload-input {
+  display: none;
+}
+
+.upload-file-list {
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+}
+
+.upload-file {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.upload-file-name {
+  overflow: hidden;
+  flex: 1;
+  color: var(--text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.new-project-card .upload-file-remove {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border: 0;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+  color: var(--muted) !important;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.new-project-card .upload-file-remove:hover {
+  background: var(--border) !important;
+  color: #fff !important;
+}
+
+/* Estas duas regras precisam vir depois das redefinicoes de .status-options
+   (linha ~537) e .action-button (linha ~582), senao a media query acima nao
+   chega a valer e o status fica em 2 colunas no celular, estourando a tela. */
+@media (max-width: 600px) {
+  .status-options {
+    grid-template-columns: 1fr;
+  }
+
+  .new-project-card .action-button {
+    width: 100%;
+  }
+}
