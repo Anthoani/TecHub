@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import FeatureCard from '../components/FeatureCard';
 import logoTecHub from '../assets/LogoTecHubPNG.png';
+import RadarNetworkIcon from '../assets/RadarNetworkIcon.svg';
+import CheckShieldIcon from '../assets/CheckShieldIcon.svg';
+import GraduationIcon from '../assets/GraduationIcon.svg';
 import './HomePage.css';
 
 export default function HomePage() {
@@ -47,19 +50,19 @@ export default function HomePage() {
 
         <div className="home-features__grid">
           <FeatureCard
-            icon={<i className="fa-solid fa-graduation-cap" />}
+            icon={GraduationIcon}
             title="Crie seu Portfólio"
             description="Cadastre seu perfil institucional e transforme seus aprendizados em portfólio real."
           />
 
           <FeatureCard
-            icon={<i className="fa-solid fa-shield-halved" />}
+            icon={CheckShieldIcon}
             title="Projetos Checados"
             description="Os envios passam por uma moderação básica antes de ficarem visíveis na plataforma."
           />
 
           <FeatureCard
-            icon={<i className="fa-solid fa-network-wired" />}
+            icon={RadarNetworkIcon}
             title="Conexão e Vitrine"
             description="Publique, entre no radar e fique disponível para o contato de recrutadores da região."
           />

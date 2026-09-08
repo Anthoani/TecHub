@@ -4,7 +4,7 @@ export default function FeatureCard({ icon, title, description }) {
   return (
     <article className="feature-card">
       <div className="feature-card__icon" aria-hidden="true">
-        {icon}
+        <img src={icon}/>
       </div>
 
       <h3 className="feature-card__title">{title}</h3>
