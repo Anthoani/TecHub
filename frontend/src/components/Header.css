@@ -148,3 +148,8 @@
     width: 100%;
   }
 }
+
+.logo-title-navbar {
+  font-family: 'CascadiaCode', sans-serif;
+  font-size: 1.25rem;
+}

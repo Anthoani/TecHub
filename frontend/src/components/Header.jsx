@@ -16,7 +16,7 @@ export default function Header() {
           <span className="site-header__symbol" aria-hidden="true">
             &lt;/&gt;
           </span>
-          <span>TecHub</span>
+          <span className="logo-title-navbar">TecHub</span>
         </Link>
 
         <button

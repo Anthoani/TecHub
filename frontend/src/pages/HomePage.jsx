@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import FeatureCard from '../components/FeatureCard';
-import logoTecHub from '../assets/LogoTecHubPNG.png';
+import logoTecHub from '../assets/LogoTecHub.svg';
 import RadarNetworkIcon from '../assets/RadarNetworkIcon.svg';
 import CheckShieldIcon from '../assets/CheckShieldIcon.svg';
 import GraduationIcon from '../assets/GraduationIcon.svg';
@@ -15,7 +15,7 @@ export default function HomePage() {
           alt="Logo do TecHub"
           className="home-hero__logo"
         />
-
+        <h1 className="logo-title">TecHub</h1>
         <h1 className="home-hero__title">
           Mostre o que você sabe
           <br />

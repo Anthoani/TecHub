@@ -15,9 +15,9 @@
 }
 
 .home-hero__logo {
-  width: 200px;
+  width: 300px;
   height: auto;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.3rem;
 }
 
 .home-hero__title {
@@ -111,11 +111,6 @@
     padding-top: 2.25rem;
   }
 
-  .home-hero__logo {
-    width: 160px;
-    margin-bottom: 1.75rem;
-  }
-
   .home-hero__description br {
     display: none;
   }
@@ -129,4 +124,18 @@
   .home-hero__secondary-button {
     width: 100%;
   }
+}
+
+@font-face {
+  font-family: 'CascadiaCode';
+  src: url('../assets/fonts/Cascadia_Code/static/CascadiaCode-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.logo-title {
+  font-family: 'CascadiaCode', sans-serif;
+  color: #ffffff;
+  font-size: 4rem;
 }
